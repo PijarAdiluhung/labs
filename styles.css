@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .uc-hero {
   height: 100vh;
-  background: url('labs/assets/UC_Background.webp') center center / cover no-repeat;
+  background: url('assets/UC_Background.webp') center center / cover no-repeat;
 }
 
 .uc-hero .overlay {
