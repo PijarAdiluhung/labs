@@ -4,6 +4,7 @@ const tasbihDisplay = document.getElementById("tasbih-count");
 const tasbihAddButton = document.getElementById("tasbih-add");
 const tasbihResetButton = document.getElementById("tasbih-reset");
 const savedTasbih = localStorage.getItem("savedCount");
+const sound = document.getElementById("tap-sound");
 
 // Get local storage
 if (savedTasbih !== null) {
@@ -16,7 +17,11 @@ if (savedTasbih !== null) {
 // Function to add and reset, with updating local storage
 function tasbihAdd() {
   if ("vibrate" in navigator) {
-        navigator.vibrate(200); 
+    navigator.vibrate(200);
+  } else {
+    if (sound) {
+        sound.play().catch(e => console.warn("Audio play failed", e));
+    }
   }
   tasbih = tasbih + 1;
   tasbihDisplay.textContent = tasbih;
@@ -25,6 +30,8 @@ function tasbihAdd() {
 function tasbihReset() {
   if ("vibrate" in navigator) {
         navigator.vibrate(500); 
+  } else {
+    if (sound) sound.play().catch(e => console.warn("Audio fallback failed", e));
   }
   tasbih = 0;
   tasbihDisplay.textContent = tasbih;
