@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+.btn-teal {
+    background-color: #0ca795;
+    border-color: #0ca795;
+    color: #fff;
+}
+
+.btn-teal:hover,
+.btn-teal:focus {
+    background-color: #22c1af;
+    border-color: #22c1af;
+    color: #fff;
+}
+
+.uc-hero {
+  height: 100vh;
+  background: url('/assets/UC_Background.webp') center center / cover no-repeat;
+}
+
+.uc-hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.text-highlight {
+  color: #22c1af; /* or any color you want */
+}
+
+.uc-logo {
+  max-width: 200px;
+}
+
+@media (max-width: 576px) {
+  .uc-logo {
+    max-width: 175px;
+  }
+}
+
+.shadow-text {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.fh-section {
+  min-height: 100vh;
+  padding: 7rem 0;
+}
+
+.fh-section-np {
+  min-height: 100vh;
+  padding: 7rem 0;
+}
