@@ -13,8 +13,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
-.btn-teal:hover,
-.btn-teal:focus {
+.btn-teal:hover {
     background-color: #22c1af;
     border-color: #22c1af;
     color: #fff;
