@@ -5,8 +5,16 @@ body {
 .header {
   background-color: #22c1af;
   color: white;
-  padding: 4rem;
+  padding: 4rem 1rem;
   border-bottom: 5px solid #fcc500;
+}
+.footer {
+  background-color: #22c1af;
+  color: white;
+  padding: 3rem 1rem 1rem;
+  border-top: 5px solid #fcc500;
+  position: relative;
+  z-index: 1;
 }
 .current-date {
   font-size: 2rem;
@@ -26,11 +34,13 @@ body {
 }
 .explanation-section {
   background: white;
-  margin-top: -30px;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 600px;
+  margin-bottom: -30px;
+  position: relative;
+  z-index: 10;
 }
 .btn-custom {
   background-color: #fcc500;
