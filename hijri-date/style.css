@@ -24,6 +24,14 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 600px;
 }
+.explanation-section {
+  background: white;
+  margin-top: -30px;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+}
 .btn-custom {
   background-color: #fcc500;
   color: black;
