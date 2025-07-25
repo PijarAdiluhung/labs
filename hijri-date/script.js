@@ -13,7 +13,7 @@ function convertToHijri() {
 
   if (result) {
     const [hy, hm, hd] = result.split('-');
-    const output = `${parseInt(hd)} ${namaBulanHijri[parseInt(hm)]} ${hy} H`;
+    const output = `${parseInt(hd)} ${namaBulanHijri[parseInt(hm)]} ${hy}`;
     document.getElementById("output").innerText = `Tanggal Hijriah: ${output}`;
   } else {
     document.getElementById("output").innerText = "Tanggal tidak ditemukan (Hanya 2025).";
@@ -30,7 +30,7 @@ function displayToday() {
   const hijri = data.gregorian_to_hijri[gToday];
   if (hijri) {
     const [hy, hm, hd] = hijri.split('-');
-    document.getElementById("hijriToday").innerText = `${parseInt(hd)} ${namaBulanHijri[parseInt(hm)]} ${hy} H`;
+    document.getElementById("hijriToday").innerText = `${parseInt(hd)} ${namaBulanHijri[parseInt(hm)]} ${hy}`;
   } else {
     document.getElementById("hijriToday").innerText = "Tanggal Hijriah tidak ditemukan.";
   }
@@ -39,14 +39,14 @@ function displayToday() {
 const namaBulanHijri = {
   1: "Muharram",
   2: "Safar",
-  3: "Rabiul Awwal",
-  4: "Rabiul Akhir",
-  5: "Jumadil Awwal",
+  3: "Rabi'ul Awal",
+  4: "Rabi'ul Akhir",
+  5: "Jumadil Awal",
   6: "Jumadil Akhir",
   7: "Rajab",
   8: "Sya'ban",
   9: "Ramadhan",
   10: "Syawwal",
-  11: "Dzulkaidah",
+  11: "Dzulqa'dah",
   12: "Dzulhijjah"
 };
