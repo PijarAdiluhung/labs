@@ -9,17 +9,40 @@ fetch("gregorian_hijri_2025.json")
 
 function convertToHijri() {
   const gDate = document.getElementById("gregDate").value;
-  const result = data.gregorian_to_hijri[gDate];
+  
+  // --- Sebelum Maghrib ---
+  const resultToday = data.gregorian_to_hijri[gDate];
 
-  if (result) {
-    const [hy, hm, hd] = result.split("-");
-    const output = `${parseInt(hd)} ${namaBulanHijri[parseInt(hm)]} ${hy}`;
-    document.getElementById("output").innerText = `Tanggal Hijriah: ${output}`;
+  // --- Setelah Maghrib ---
+  const dateObj = new Date(gDate);
+  dateObj.setDate(dateObj.getDate() + 1);
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+  const day = String(dateObj.getDate()).padStart(2, "0");
+  const gDateTomorrow = `${year}-${month}-${day}`;
+  const resultTomorrow = data.gregorian_to_hijri[gDateTomorrow];
+
+  let output = "";
+
+  if (resultToday) {
+    const [hy, hm, hd] = resultToday.split("-");
+    const hijriToday = `${parseInt(hd)} ${namaBulanHijri[parseInt(hm)]} ${hy}`;
+    output += `Sebelum Maghrib: ${hijriToday}\n`;
   } else {
-    document.getElementById("output").innerText =
-      "Tanggal tidak ditemukan (Hanya 2025).";
+    output += `Sebelum Maghrib: Tanggal tidak ditemukan.\n`;
   }
+
+  if (resultTomorrow) {
+    const [hy2, hm2, hd2] = resultTomorrow.split("-");
+    const hijriTomorrow = `${parseInt(hd2)} ${namaBulanHijri[parseInt(hm2)]} ${hy2}`;
+    output += `Setelah Maghrib: ${hijriTomorrow}`;
+  } else {
+    output += `Setelah Maghrib: Tanggal tidak ditemukan.`;
+  }
+
+  document.getElementById("output").innerText = output;
 }
+
 
 function getLocalISODate() {
   const today = new Date();

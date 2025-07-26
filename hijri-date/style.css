@@ -69,7 +69,7 @@ body {
 /* Specific styling for the 'Setelah Maghrib' active tab */
 .tab-button.active-after-maghrib {
   background-color: white;
-  color: #1abc9c; /* Text color for the active tab */
+  color: #22c1af; /* Text color for the active tab */
   border-top-right-radius: 15px;
   border-top-left-radius: 0;
   padding-bottom: 2.25rem; /* Extend downwards to meet the card */
@@ -79,7 +79,7 @@ body {
 }
 .tab-button.active-before-maghrib {
   background-color: white;
-  color: #1abc9c;
+  color: #22c1af;
   border-top-left-radius: 15px;
   border-top-right-radius: 0;
   padding-bottom: 2.25rem; /* Extend downwards to meet the card */
