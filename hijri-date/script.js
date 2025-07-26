@@ -9,7 +9,7 @@ fetch("gregorian_hijri_2025.json")
 
 function convertToHijri() {
   const gDate = document.getElementById("gregDate").value;
-  
+
   // --- Sebelum Maghrib ---
   const resultToday = data.gregorian_to_hijri[gDate];
 
@@ -34,7 +34,9 @@ function convertToHijri() {
 
   if (resultTomorrow) {
     const [hy2, hm2, hd2] = resultTomorrow.split("-");
-    const hijriTomorrow = `${parseInt(hd2)} ${namaBulanHijri[parseInt(hm2)]} ${hy2}`;
+    const hijriTomorrow = `${parseInt(hd2)} ${
+      namaBulanHijri[parseInt(hm2)]
+    } ${hy2}`;
     output += `Setelah Maghrib: ${hijriTomorrow}`;
   } else {
     output += `Setelah Maghrib: Tanggal tidak ditemukan.`;
@@ -42,7 +44,6 @@ function convertToHijri() {
 
   document.getElementById("output").innerText = output;
 }
-
 
 function getLocalISODate() {
   const today = new Date();
@@ -96,10 +97,9 @@ function displayTomorrow() {
   }
 }
 
-
 const namaBulanHijri = {
   1: "Muharram",
-  2: "Safar",
+  2: "Shafar",
   3: "Rabi'ul Awal",
   4: "Rabi'ul Akhir",
   5: "Jumadil Awal",
@@ -112,32 +112,58 @@ const namaBulanHijri = {
   12: "Dzulhijjah",
 };
 
-// Basic UI logic for tab switching (can be expanded with actual date logic later)
-document
-  .getElementById("tabSebelumMaghrib")
-  .addEventListener("click", function () {
-    this.classList.add("active", "active-before-maghrib");
-    this.classList.remove("inactive-before-maghrib");
-    document
-      .getElementById("tabSetelahMaghrib")
-      .classList.remove("active", "active-after-maghrib");
-    document
-      .getElementById("tabSetelahMaghrib")
-      .classList.add("inactive-after-maghrib");
-    displayToday(); // Refresh the display for "Sebelum Maghrib"
-  });
+// Basic UI logic for tab switching
+const tabAfter = document.getElementById("tabSetelahMaghrib");
+const tabBefore = document.getElementById("tabSebelumMaghrib");
 
-document
-  .getElementById("tabSetelahMaghrib")
-  .addEventListener("click", function () {
-    this.classList.add("active", "active-after-maghrib");
-    this.classList.remove("inactive-after-maghrib");
-    document
-      .getElementById("tabSebelumMaghrib")
-      .classList.remove("active", "active-before-maghrib");
-    document
-      .getElementById("tabSebelumMaghrib")
-      .classList.add("inactive-before-maghrib");
-    displayTomorrow(); // Refresh the display for "Setelah Maghrib"
-  });
+function activateBeforeMaghribTab() {
+  tabBefore.classList.add("active", "active-before-maghrib");
+  tabBefore.classList.remove("inactive-before-maghrib");
 
+  tabAfter.classList.remove("active", "active-after-maghrib");
+  tabAfter.classList.add("inactive-after-maghrib");
+
+  displayToday();
+}
+
+function activateAfterMaghribTab() {
+  tabAfter.classList.add("active", "active-after-maghrib");
+  tabAfter.classList.remove("inactive-after-maghrib");
+
+  tabBefore.classList.remove("active", "active-before-maghrib");
+  tabBefore.classList.add("inactive-before-maghrib");
+
+  displayTomorrow();
+}
+
+tabBefore.addEventListener("click", activateBeforeMaghribTab);
+tabAfter.addEventListener("click", activateAfterMaghribTab);
+
+async function checkIfAfterSunset(callback) {
+  try {
+    const res = await fetch("https://ipapi.co/json/");
+    const data = await res.json();
+    const { latitude, longitude, timezone } = data;
+
+    const now = new Date(
+      new Date().toLocaleString("en-US", { timeZone: timezone })
+    );
+    const times = SunCalc.getTimes(now, latitude, longitude);
+    const sunset = times.sunset;
+
+    if (now > sunset) {
+      callback();
+    } else {
+      console.log(
+        `Not yet sunset. Current time: ${now.toLocaleTimeString()}, Sunset time: ${sunset.toLocaleTimeString()}`
+      );
+    }
+  } catch (err) {
+    console.error("Sunset check failed:", err);
+  }
+}
+
+// Run after page loads
+window.onload = () => {
+  checkIfAfterSunset(activateAfterMaghribTab);
+};

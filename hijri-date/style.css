@@ -21,20 +21,7 @@ body {
   margin-top: -5px;
   opacity: 0.85;
 }
-.date-display-card {
-  background-color: white;
-  color: #34495e; /* Dark grey for text inside card */
-  padding: 2rem 1rem;
-  width: 100%;
-  max-width: 600px;
-  border-radius: 15px;
-  font-size: 3rem;
-  font-weight: bold;
-  /* margin-top: -4rem; /* Overlap with tabs */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 9; /* Ensure it's above the tabs */
-}
+
 .tab-button {
   background-color: transparent;
   border: none;
@@ -65,10 +52,10 @@ body {
   background-color: white;
   color: #34495e; /* Dark grey for text inside card */
   padding: 2.5rem 1.5rem;
+  width: 100%;
   max-width: 600px;
   border-radius: 15px;
   font-size: 3rem;
-  font-weight: bold;
   margin-top: -3.5rem; /* Overlap with tabs */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
