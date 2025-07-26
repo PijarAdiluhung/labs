@@ -48,6 +48,15 @@ body {
   flex: 1 1 0; /* Make each tab take equal full width */
   width: 100%;
 }
+
+@media (max-width: 600px) {
+  .tab-button {
+    font-size: 0.85rem;
+  }
+  .sub-date {
+    font-size: 1rem;
+  }
+}
 .tab-button.active {
   font-weight: bold;
 }
