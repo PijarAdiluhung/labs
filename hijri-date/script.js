@@ -1,3 +1,4 @@
+// --- Fetch conversion table from JSON file ---
 let data;
 
 fetch("gregorian_hijri_2025.json")
@@ -7,44 +8,8 @@ fetch("gregorian_hijri_2025.json")
     displayToday();
   });
 
-function convertToHijri() {
-  const gDate = document.getElementById("gregDate").value;
 
-  // --- Sebelum Maghrib ---
-  const resultToday = data.gregorian_to_hijri[gDate];
-
-  // --- Setelah Maghrib ---
-  const dateObj = new Date(gDate);
-  dateObj.setDate(dateObj.getDate() + 1);
-  const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-  const day = String(dateObj.getDate()).padStart(2, "0");
-  const gDateTomorrow = `${year}-${month}-${day}`;
-  const resultTomorrow = data.gregorian_to_hijri[gDateTomorrow];
-
-  let output = "";
-
-  if (resultToday) {
-    const [hy, hm, hd] = resultToday.split("-");
-    const hijriToday = `${parseInt(hd)} ${namaBulanHijri[parseInt(hm)]} ${hy}`;
-    output += `Sebelum Maghrib: ${hijriToday}\n`;
-  } else {
-    output += `Sebelum Maghrib: Tanggal tidak ditemukan.\n`;
-  }
-
-  if (resultTomorrow) {
-    const [hy2, hm2, hd2] = resultTomorrow.split("-");
-    const hijriTomorrow = `${parseInt(hd2)} ${
-      namaBulanHijri[parseInt(hm2)]
-    } ${hy2}`;
-    output += `Setelah Maghrib: ${hijriTomorrow}`;
-  } else {
-    output += `Setelah Maghrib: Tanggal tidak ditemukan.`;
-  }
-
-  document.getElementById("output").innerText = output;
-}
-
+// --- Header section ---
 function getLocalISODate() {
   const today = new Date();
   const year = today.getFullYear();
@@ -97,6 +62,48 @@ function displayTomorrow() {
   }
 }
 
+
+// --- Conversion section --- 
+function convertToHijri() {
+  const gDate = document.getElementById("gregDate").value;
+
+  // --- Sebelum Maghrib ---
+  const resultToday = data.gregorian_to_hijri[gDate];
+
+  // --- Setelah Maghrib ---
+  const dateObj = new Date(gDate);
+  dateObj.setDate(dateObj.getDate() + 1);
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+  const day = String(dateObj.getDate()).padStart(2, "0");
+  const gDateTomorrow = `${year}-${month}-${day}`;
+  const resultTomorrow = data.gregorian_to_hijri[gDateTomorrow];
+
+  let output = "";
+
+  if (resultToday) {
+    const [hy, hm, hd] = resultToday.split("-");
+    const hijriToday = `${parseInt(hd)} ${namaBulanHijri[parseInt(hm)]} ${hy}`;
+    output += `Sebelum Maghrib: ${hijriToday}\n`;
+  } else {
+    output += `Sebelum Maghrib: Tanggal tidak ditemukan.\n`;
+  }
+
+  if (resultTomorrow) {
+    const [hy2, hm2, hd2] = resultTomorrow.split("-");
+    const hijriTomorrow = `${parseInt(hd2)} ${
+      namaBulanHijri[parseInt(hm2)]
+    } ${hy2}`;
+    output += `Setelah Maghrib: ${hijriTomorrow}`;
+  } else {
+    output += `Setelah Maghrib: Tanggal tidak ditemukan.`;
+  }
+
+  document.getElementById("output").innerText = output;
+}
+
+
+// --- Month names in Hijri ---
 const namaBulanHijri = {
   1: "Muharram",
   2: "Shafar",
@@ -112,7 +119,8 @@ const namaBulanHijri = {
   12: "Dzulhijjah",
 };
 
-// Basic UI logic for tab switching
+
+// --- Basic UI logic for tab switching ---
 const tabAfter = document.getElementById("tabSetelahMaghrib");
 const tabBefore = document.getElementById("tabSebelumMaghrib");
 
@@ -139,6 +147,8 @@ function activateAfterMaghribTab() {
 tabBefore.addEventListener("click", activateBeforeMaghribTab);
 tabAfter.addEventListener("click", activateAfterMaghribTab);
 
+
+// --- Function to check if after sunset and activate the appropriate tab ---
 async function checkIfAfterSunset(callback) {
   try {
     const res = await fetch("https://ipapi.co/json/");
@@ -163,7 +173,6 @@ async function checkIfAfterSunset(callback) {
   }
 }
 
-// Run after page loads
 window.onload = () => {
   checkIfAfterSunset(activateAfterMaghribTab);
 };
