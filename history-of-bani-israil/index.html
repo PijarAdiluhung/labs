@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Bani Isrā'īl — Interactive Historical Map (Islamic view)</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+    <!-- Splash -->
+    <div id="splash" role="dialog" aria-modal="true">
+        <div class="card">
+            <h1 style="margin-top:0">Bani Isrā'īl — A Guided Historical Map (Islamic perspective)</h1>
+            <p style="font-size:1.05rem; line-height:1.45rem;">
+                Explore eras from Prophet Ibrāhīm through ‘Īsā. Use the legend to jump to an era,
+                click numbered places to read contextual details, and follow the routes showing chronology.
+                This is a starter dataset — add or correct places using the JS `ERAS` object inside the file.
+            </p>
+            <div style="margin-top:1rem; display:flex; gap:8px; justify-content:center;">
+                <button class="btn btn-primary" id="enterBtn">Enter the map</button>
+                <button class="btn btn-ghost" id="howBtn">How to edit data</button>
+            </div>
+            <p style="margin-top:12px; font-size:0.9rem; color: #dce9ff;">
+                Tip: click a place, then the "More" button to see extended contextual notes.
+            </p>
+        </div>
+    </div>
+
+    <!-- Floating legend -->
+    <div class="legend" id="legend">
+        <button class="legend-toggle" id="legendToggle">☰ Eras</button>
+        <div class="legend-body" id="legendBody">
+            <h4>Choose an era</h4>
+            <div id="erasList"></div>
+            <hr style="border:none;border-top:1px solid #eee;margin:8px 0" />
+            <div style="font-size:12px;color:#555">Controls: Zoom / drag / click places. Routes show chronological
+                order.</div>
+        </div>
+    </div>
+
+    <!-- Modal for place details -->
+    <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal" role="dialog" aria-modal="true">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div><strong id="modalTitle">Title</strong>
+                    <div id="modalDate" style="font-size:13px;color:#666"></div>
+                </div>
+                <div class="close-x" id="modalClose" aria-label="Close">✕</div>
+            </div>
+            <hr />
+            <img id="modalImage" src="" alt="" style="display:none" />
+            <div id="modalBody" style="line-height:1.45"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS + plugin for polyline arrows -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-polylinedecorator@1.7.0/dist/leaflet.polylineDecorator.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
